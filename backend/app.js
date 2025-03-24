@@ -8,11 +8,14 @@ import reviewsRoutes from "./src/routes/reviews.js"
 import evaluacionesRoutes from "./src/routes/evaluaciones.js"
 import registerEmployeesRoutes from "./src/routes/registerEmployees.js"
 import loginRoutes from "./src/routes/login.js"
+import cookieParser from "cookie-parser";
+
 
 
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/api/products", productsRoutes);
 app.use("/api/clients", clientsRoutes);
