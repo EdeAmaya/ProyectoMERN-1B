@@ -6,6 +6,8 @@ import sucursalesRoutes from "./src/routes/sucursales.js"
 import categoriasRoutes from "./src/routes/categorias.js"
 import reviewsRoutes from "./src/routes/reviews.js"
 import evaluacionesRoutes from "./src/routes/evaluaciones.js"
+import registerEmployeesRoutes from "./src/routes/registerEmployees.js"
+import loginRoutes from "./src/routes/login.js"
 
 
 const app = express();
@@ -19,6 +21,8 @@ app.use("/api/sucursales", sucursalesRoutes);
 app.use("/api/categorias", categoriasRoutes);
 app.use("/api/reviews", reviewsRoutes);
 app.use("/api/evaluaciones", evaluacionesRoutes);
+app.use("/api/registerEmployees", registerEmployeesRoutes);
+app.use("/api/login", loginRoutes);
 
 
 export default app;
