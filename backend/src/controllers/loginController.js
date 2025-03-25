@@ -43,7 +43,8 @@ loginController.login = async (req,res) =>{
     jsonwebtoken.sign({id:userFound._id},config.JWT.secret,{expiresIn:config.JWT.expiresIn},(error,token)=>{
         if(error) console.log(error);
         res.cookie("authToken",token);
-        return res.json({message:"User logged in", userType})
+        res.json({message:"User logged in"})
+        
     })
  }
   catch(error){

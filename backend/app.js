@@ -9,6 +9,7 @@ import evaluacionesRoutes from "./src/routes/evaluaciones.js"
 import registerEmployeesRoutes from "./src/routes/registerEmployees.js"
 import loginRoutes from "./src/routes/login.js"
 import cookieParser from "cookie-parser";
+import logoutRoutes from "./src/routes/logout.js";
 
 
 
@@ -26,6 +27,7 @@ app.use("/api/reviews", reviewsRoutes);
 app.use("/api/evaluaciones", evaluacionesRoutes);
 app.use("/api/registerEmployees", registerEmployeesRoutes);
 app.use("/api/login", loginRoutes);
+app.use("/api/logout", logoutRoutes)
 
 
 export default app;

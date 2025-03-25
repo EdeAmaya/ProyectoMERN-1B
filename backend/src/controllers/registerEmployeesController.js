@@ -14,7 +14,7 @@ registerEmployeesController.insertregisterEmployees = async (req,res) =>{
             return res.json({message:"Employee already exists"})
         }
 
-        const passwordHash = await bcryptjs.hash(password);
+        const passwordHash = await bcryptjs.hash(password, 10);
 
         const newRegisterEmployees = new EmployeesModels({ name, lastname, birthday, email,address,hireDate,password:passwordHash,telephone,dui,isssNumber,isVerified })
         
@@ -23,6 +23,7 @@ registerEmployeesController.insertregisterEmployees = async (req,res) =>{
         jsonwebtoken.sign({id:newRegisterEmployees._id},config.JWT.secret,{expiresIn:config.JWT.expiresIn},(error,token)=>{
             if(error) console.log(error);
             res.cookie("authToken",token);
+            res.json({message:"Employee registered"})
             }
     )
     }
