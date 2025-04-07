@@ -10,6 +10,7 @@ import registerEmployeesRoutes from "./src/routes/registerEmployees.js"
 import loginRoutes from "./src/routes/login.js"
 import cookieParser from "cookie-parser";
 import logoutRoutes from "./src/routes/logout.js";
+import registerClientsRoutes from "./src/routes/registerClients.js";
 
 
 
@@ -28,6 +29,8 @@ app.use("/api/evaluaciones", evaluacionesRoutes);
 app.use("/api/registerEmployees", registerEmployeesRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/logout", logoutRoutes)
+app.use("/api/registerClients", registerClientsRoutes);
+
 
 
 export default app;
