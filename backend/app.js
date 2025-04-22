@@ -31,6 +31,8 @@ app.use("/api/login", loginRoutes);
 app.use("/api/logout", logoutRoutes)
 app.use("/api/registerClients", registerClientsRoutes);
 
+app.use("/api/passwordRecovery");
+
 
 
 export default app;
