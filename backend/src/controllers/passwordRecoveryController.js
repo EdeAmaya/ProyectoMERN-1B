@@ -1,9 +1,8 @@
 import jsonwebtoken from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-import clientsModel from "./models/clientsModel.js";
-import employeeModel from "./models/employeeModel.js";
-
+import clientsModel from "../models/Clients.js";
+import employeeModel from "../models/Employees.js";
 import { sendEmail,HTMLRecoveryEmail } from "../utils/mailPasswordRecovery.js";
 import {config} from "../config.js";
 
@@ -53,4 +52,37 @@ try {
 }catch (error) {
     console.log("error" + error);
 }
+};
+
+passwordRecoveryController.verifyCode = async (req, res) => {
+    const { code } = req.body;
+    try {
+        const token = req.cookies.tokenRecoveryCode;
+        const decoded = jsonwebtoken.verify(token, config.JWT.secret);
+        const { email, userType } = decoded;
+
+        if (decoded.code !== code) {
+            return res.json({ message: "Invalid code" });
+        }
+
+        const newToken = jsonwebtoken.sign(
+            {email: decoded.email,
+            code: decoded.code, 
+            userType: decoded.userType,
+            verified: true},
+
+            config.JWT.secret,
+            { expiresIn: "25m" }
+        );
+
+        res.cookie("tokenRecoveryCode", newToken, {maxAge: 25 * 60 * 1000 });
+        res.json({ message: "Code verified" });
+
+     
+
+    } catch (error) {
+        console.log("error" + error);
+    }
 }
+
+export default passwordRecoveryController;

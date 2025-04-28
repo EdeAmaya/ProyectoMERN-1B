@@ -11,6 +11,7 @@ import loginRoutes from "./src/routes/login.js"
 import cookieParser from "cookie-parser";
 import logoutRoutes from "./src/routes/logout.js";
 import registerClientsRoutes from "./src/routes/registerClients.js";
+import passwordRecoveryRoutes from "./src/routes/passwordRecovery.js";
 
 
 
@@ -30,8 +31,7 @@ app.use("/api/registerEmployees", registerEmployeesRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/logout", logoutRoutes)
 app.use("/api/registerClients", registerClientsRoutes);
-
-app.use("/api/passwordRecovery");
+app.use("/api/passwordRecovery", passwordRecoveryRoutes);
 
 
 
