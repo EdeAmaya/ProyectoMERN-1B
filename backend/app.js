@@ -12,6 +12,7 @@ import cookieParser from "cookie-parser";
 import logoutRoutes from "./src/routes/logout.js";
 import registerClientsRoutes from "./src/routes/registerClients.js";
 import passwordRecoveryRoutes from "./src/routes/passwordRecovery.js";
+import blogRuotes from "./src/routes/blog.js";
 
 
 
@@ -32,6 +33,8 @@ app.use("/api/login", loginRoutes);
 app.use("/api/logout", logoutRoutes)
 app.use("/api/registerClients", registerClientsRoutes);
 app.use("/api/passwordRecovery", passwordRecoveryRoutes);
+
+app.use("/api/blog", blogRuotes);
 
 
 
