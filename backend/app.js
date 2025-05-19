@@ -13,6 +13,7 @@ import logoutRoutes from "./src/routes/logout.js";
 import registerClientsRoutes from "./src/routes/registerClients.js";
 import passwordRecoveryRoutes from "./src/routes/passwordRecovery.js";
 import blogRuotes from "./src/routes/blog.js";
+import { validateAuthToken } from "./src/middlewares/validateAuthToken.js";
 
 
 
@@ -23,7 +24,7 @@ app.use(cookieParser());
 
 app.use("/api/products", productsRoutes);
 app.use("/api/clients", clientsRoutes);
-app.use("/api/employees", employeesRoutes);
+app.use("/api/employees", validateAuthToken(["Employee"]),employeesRoutes);
 app.use("/api/sucursales", sucursalesRoutes);
 app.use("/api/categorias", categoriasRoutes);
 app.use("/api/reviews", reviewsRoutes);

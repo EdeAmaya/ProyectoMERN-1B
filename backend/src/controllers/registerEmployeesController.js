@@ -20,7 +20,9 @@ registerEmployeesController.insertregisterEmployees = async (req,res) =>{
         
         await newRegisterEmployees.save();
 
-        jsonwebtoken.sign({id:newRegisterEmployees._id},
+        const userType = "Employee";
+
+        jsonwebtoken.sign({id:newRegisterEmployees._id, userType},
             config.JWT.secret,
             {expiresIn:config.JWT.expiresIn},
             
