@@ -14,10 +14,18 @@ import registerClientsRoutes from "./src/routes/registerClients.js";
 import passwordRecoveryRoutes from "./src/routes/passwordRecovery.js";
 import blogRuotes from "./src/routes/blog.js";
 import { validateAuthToken } from "./src/middlewares/validateAuthToken.js";
+import cors from "cors";
 
 
 
 const app = express();
+
+app.use(
+    cors({
+      origin: "http://localhost:5173", // Dominio del cliente
+      credentials: true, // Permitir envío de cookies y credenciales
+    })
+  );
 
 app.use(express.json());
 app.use(cookieParser());
