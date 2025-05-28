@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+
 const useDataCategories = () => {
-const [activeTab, setActiveTab] = useState("list");
-  const API = "http://localhost:4000/api/categories";
+  const [activeTab, setActiveTab] = useState("list");
+  const API = "http://localhost:4000/api/categorias";
   const [id, setId] = useState("");
   const [nameCategory, setNameCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [status, setStatus] = useState(""); // New state for status
+  const [image, setImage] = useState(""); // New state for image
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchCategories = async () => {
     const response = await fetch(API);
     if (!response.ok) {
-      throw new Error("Hubo un error al obtener las categorías");
+      throw new Error("Error fetching categories");
     }
     const data = await response.json();
     setCategories(data);
@@ -28,6 +31,8 @@ const [activeTab, setActiveTab] = useState("list");
     const newCategory = {
       name: nameCategory,
       description,
+      status, // Include status
+      image, // Include image
     };
 
     const response = await fetch(API, {
@@ -39,15 +44,16 @@ const [activeTab, setActiveTab] = useState("list");
     });
 
     if (!response.ok) {
-      throw new Error("Hubo un error al registrar la categoría");
+      throw new Error("Error saving category");
     }
 
     const data = await response.json();
-    toast.success('Categoría registrada');
-    setCategories(data);
+    toast.success("Category saved");
     fetchCategories();
     setNameCategory("");
     setDescription("");
+    setStatus(""); // Clear status
+    setImage(""); // Clear image
   };
 
   const deleteCategory = async (id) => {
@@ -59,10 +65,10 @@ const [activeTab, setActiveTab] = useState("list");
     });
 
     if (!response.ok) {
-      throw new Error("Hubo un error al eliminar la categoría");
+      throw new Error("Error deleting category");
     }
 
-      toast.success('Categoria Eliminada');
+    toast.success("Category deleted");
     fetchCategories();
   };
 
@@ -70,6 +76,8 @@ const [activeTab, setActiveTab] = useState("list");
     setId(dataCategory._id);
     setNameCategory(dataCategory.name);
     setDescription(dataCategory.description);
+    setStatus(dataCategory.status); // Set status
+    setImage(dataCategory.image); // Set image
     setActiveTab("form");
   };
 
@@ -80,6 +88,8 @@ const [activeTab, setActiveTab] = useState("list");
       const editCategory = {
         name: nameCategory,
         description,
+        status,
+        image,
       };
       const response = await fetch(`${API}/${id}`, {
         method: "PUT",
@@ -90,24 +100,22 @@ const [activeTab, setActiveTab] = useState("list");
       });
 
       if (!response.ok) {
-        throw new Error("Error al actualizar la categoría");
+        throw new Error("Error updating category");
       }
 
-      const data = await response.json();
-      console.log("data desde handleEdit en hook custom");
-      console.log(data);
-       toast.success('categoría actualizada');
-      setId("");
-      setDescription("");
-      setNameCategory("");
-      setActiveTab("list");
+      toast.success("Category updated");
       fetchCategories();
+      setId("");
+      setNameCategory("");
+      setDescription("");
+      setStatus(""); // Clear status
+      setImage(""); // Clear image
+      setActiveTab("list");
     } catch (error) {
-      console.error("Error al editar la categoría:", error);
+      console.error("Error editing category:", error);
     }
   };
 
-  
   return {
     activeTab,
     setActiveTab,
@@ -116,6 +124,10 @@ const [activeTab, setActiveTab] = useState("list");
     setNameCategory,
     description,
     setDescription,
+    status,
+    setStatus, // Include setter for status
+    image,
+    setImage, // Include setter for image
     categories,
     loading,
     saveCategory,
@@ -123,7 +135,6 @@ const [activeTab, setActiveTab] = useState("list");
     updateCategories,
     handleEdit,
   };
-
 };
 
 export default useDataCategories;

@@ -17,7 +17,13 @@ const Categories = () => {
     saveCategory,
     deleteCategory,
     updateCategories,
-    handleEdit
+    handleEdit,
+    status,
+    setStatus,
+    image,
+    setImage,
+    clearForm
+
   } = useDataCategories();
 
   return (
@@ -62,6 +68,11 @@ const Categories = () => {
                   description={description}
                   id={id}
                   handleEdit={handleEdit}
+                status={status}
+                setStatus={setStatus}
+                image={image}
+                setImage={setImage}
+ 
                 />
               </div>
             )}
