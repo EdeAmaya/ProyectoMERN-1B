@@ -15,92 +15,116 @@ const NavBar = () => {
   if (!authCokie) return null;
 
   const navItems = [
-    { to: "/models", label: "Modelos" },
-    { to: "/brands", label: "Marcas" },
-    { to: "/employees", label: "Empleados" },
-    { to: "/categories", label: "Categorías" },
-    { to: "/products", label: "Productos" },
+    { to: "/products", label: "Productos", icon: "🛍️" },
+    { to: "/categories", label: "Categorías", icon: "📂" },
+    { to: "/employees", label: "Empleados", icon: "👥" },
+    
+    
   ];
 
   return (
-    <nav className="bg-gray-800 text-white">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div className="text-lg font-bold">
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              isActive ? "text-blue-500 font-bold" : "text-gray-300 hover:text-gray-400"
-            }
-          >
-            ByteShop
-          </NavLink>
-        </div>
+    <nav className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white shadow-xl border-b-4 border-red-900">
+      <div className="container mx-auto px-6 py-4">
+        <div className="flex justify-between items-center">
+          {/* Logo/Brand */}
+          <div className="flex items-center space-x-3">
+            <div className="bg-white text-red-700 p-2 rounded-full shadow-lg">
+              <span className="text-2xl font-black">🥤</span>
+            </div>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `text-2xl font-black tracking-wide transition-all duration-300 ${
+                  isActive 
+                    ? "text-yellow-300 drop-shadow-lg" 
+                    : "text-white hover:text-yellow-200 hover:drop-shadow-md"
+                }`
+              }
+            >
+              CocaCola
+              <span className="text-sm font-normal block -mt-1 text-red-200">
+                
+              </span>
+            </NavLink>
+          </div>
 
-        {/* Botón hamburguesa */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-gray-300 hover:text-white focus:outline-none"
-          >
-            ☰
-          </button>
-        </div>
+          {/* Botón hamburguesa */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-white hover:text-yellow-200 focus:outline-none transition-colors duration-300 p-2"
+            >
+              <div className="space-y-1">
+                <div className={`w-6 h-0.5 bg-current transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></div>
+                <div className={`w-6 h-0.5 bg-current transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></div>
+                <div className={`w-6 h-0.5 bg-current transition-transform duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
+              </div>
+            </button>
+          </div>
 
-        {/* Menú para pantallas medianas en adelante */}
-        <ul className="hidden md:flex space-x-6">
-          {navItems.map((item) => (
-            <li key={item.to}>
+          {/* Menú para pantallas grandes */}
+          <div className="hidden lg:flex items-center space-x-1">
+            {navItems.map((item) => (
               <NavLink
+                key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  isActive ? "text-blue-500 font-bold" : "text-gray-300 hover:text-gray-400"
+                  `flex items-center space-x-2 px-4 py-2 rounded-lg font-semibold transition-all duration-300 ${
+                    isActive 
+                      ? "bg-white text-red-700 shadow-lg transform scale-105" 
+                      : "text-white hover:bg-red-500 hover:bg-opacity-50 hover:shadow-md"
+                  }`
                 }
               >
-                {item.label}
+                <span className="text-lg">{item.icon}</span>
+                <span>{item.label}</span>
               </NavLink>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </div>
 
-        {/* Botón de logout en pantallas grandes */}
-        <div className="hidden md:block">
-          <button
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-            onClick={handleLogout}
-          >
-            Cerrar Sesión
-          </button>
+          {/* Botón de logout en pantallas grandes */}
+          <div className="hidden lg:block">
+            <button
+              className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-red-800 px-6 py-2 rounded-full font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-yellow-300"
+              onClick={handleLogout}
+            >
+              Cerrar Sesión
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Menú móvil desplegable */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden px-4 pb-3">
-          <ul className="space-y-2">
-            {navItems.map((item) => (
-              <li key={item.to}>
+        {/* Menú móvil desplegable */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden mt-4 pb-4 border-t border-red-500 pt-4">
+            <div className="space-y-2">
+              {navItems.map((item) => (
                 <NavLink
+                  key={item.to}
                   to={item.to}
                   className={({ isActive }) =>
-                    isActive ? "text-blue-500 font-bold" : "text-gray-300 hover:text-gray-400"
+                    `flex items-center space-x-3 px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                      isActive 
+                        ? "bg-white text-red-700 shadow-lg" 
+                        : "text-white hover:bg-red-500 hover:bg-opacity-50"
+                    }`
                   }
-                  onClick={() => setIsMobileMenuOpen(false)} // Cierra menú al hacer click
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {item.label}
+                  <span className="text-xl">{item.icon}</span>
+                  <span>{item.label}</span>
                 </NavLink>
-              </li>
-            ))}
-            <li>
+              ))}
               <button
-                className="w-full text-left bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-red-800 px-4 py-3 rounded-lg font-bold shadow-lg mt-4 border-2 border-yellow-300"
                 onClick={handleLogout}
               >
-                Cerrar Sesión
+                <span>🚪</span>
+                <span>Cerrar Sesión</span>
               </button>
-            </li>
-          </ul>
-        </div>
-      )}
+            </div>
+          </div>
+        )}
+      </div>
     </nav>
   );
 };
