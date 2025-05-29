@@ -10,8 +10,6 @@ import {
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Employees from "../pages/Employees";
-import Brands from "../pages/Brands";
-import Models from "../pages/Models";
 import Categories from "../pages/Categories";
 import { PrivateRoute } from "./PrivateRoute";
 
@@ -40,8 +38,6 @@ function Navegation() {
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employees" element={<Employees />} />
-          <Route path="/brands" element={<Brands />} />
-          <Route path="/models" element={<Models />} />
           <Route path="/categories" element={<Categories />} />
         </Route>
         <Route path="/products" element={<Products />} />

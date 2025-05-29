@@ -6,6 +6,20 @@ const CardEmployee = ({ employee, deleteEmployee, updateEmployee }) => {
     return <div className="text-center text-gray-500">Loading...</div>;
   }
 
+  // Función para formatear fechas
+  const formatDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    try {
+      return new Date(dateString).toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+    } catch (error) {
+      return 'N/A';
+    }
+  };
+
   return (
     <div className="group max-w-sm mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden border-4 border-blue-100 hover:border-blue-300 transform hover:scale-105 transition-all duration-500 hover:shadow-3xl">
       {/* Header con avatar */}
@@ -18,17 +32,15 @@ const CardEmployee = ({ employee, deleteEmployee, updateEmployee }) => {
         </div>
         
         {/* Badge de verificación */}
-        {employee.isVerified !== undefined && (
-          <div className="absolute top-4 right-4">
-            <span className={`px-3 py-1 text-xs font-bold rounded-full shadow-lg border-2 ${
-              employee.isVerified 
-                ? 'bg-green-500 text-white border-green-400 shadow-green-200' 
-                : 'bg-red-500 text-white border-red-400 shadow-red-200'
-            }`}>
-              {employee.isVerified ? '✅ Verificado' : '❌ Pendiente'}
-            </span>
-          </div>
-        )}
+        <div className="absolute top-4 right-4">
+          <span className={`px-3 py-1 text-xs font-bold rounded-full shadow-lg border-2 ${
+            employee.isVerified 
+              ? 'bg-green-500 text-white border-green-400 shadow-green-200' 
+              : 'bg-red-500 text-white border-red-400 shadow-red-200'
+          }`}>
+            {employee.isVerified ? '✅ Verificado' : '❌ Pendiente'}
+          </span>
+        </div>
       </div>
       
       <div className="px-6 py-6 bg-gradient-to-b from-white to-blue-50">
@@ -52,7 +64,7 @@ const CardEmployee = ({ employee, deleteEmployee, updateEmployee }) => {
             <div className="flex items-center space-x-2">
               <span className="text-blue-600">📧</span>
               <p className="text-gray-700 font-medium text-sm">
-                <span className="font-semibold">Email:</span> {employee.email}
+                <span className="font-semibold">Email:</span> {employee.email || 'No especificado'}
               </p>
             </div>
           </div>
@@ -61,7 +73,7 @@ const CardEmployee = ({ employee, deleteEmployee, updateEmployee }) => {
             <div className="flex items-center space-x-2">
               <span className="text-green-600">📞</span>
               <p className="text-gray-700 font-medium text-sm">
-                <span className="font-semibold">Teléfono:</span> {employee.telephone}
+                <span className="font-semibold">Teléfono:</span> {employee.telephone || 'No especificado'}
               </p>
             </div>
           </div>
@@ -70,7 +82,7 @@ const CardEmployee = ({ employee, deleteEmployee, updateEmployee }) => {
             <div className="flex items-center space-x-2">
               <span className="text-purple-600">🆔</span>
               <p className="text-gray-700 font-medium text-sm">
-                <span className="font-semibold">DUI:</span> {employee.dui}
+                <span className="font-semibold">DUI:</span> {employee.dui || 'No especificado'}
               </p>
             </div>
           </div>
@@ -79,7 +91,7 @@ const CardEmployee = ({ employee, deleteEmployee, updateEmployee }) => {
             <div className="flex items-center space-x-2">
               <span className="text-orange-600">🏠</span>
               <p className="text-gray-700 font-medium text-sm">
-                <span className="font-semibold">Dirección:</span> {employee.address}
+                <span className="font-semibold">Dirección:</span> {employee.address || 'No especificada'}
               </p>
             </div>
           </div>
@@ -90,10 +102,7 @@ const CardEmployee = ({ employee, deleteEmployee, updateEmployee }) => {
                 <span className="text-pink-600 text-sm">🎂</span>
                 <p className="text-gray-700 font-medium text-xs">
                   <span className="font-semibold">Nacimiento:</span><br />
-                  {employee.birthday || employee.birthdate ? 
-                    new Date(employee.birthday || employee.birthdate).toLocaleDateString() : 
-                    'N/A'
-                  }
+                  {formatDate(employee.birthday || employee.birthdate)}
                 </p>
               </div>
             </div>
@@ -103,10 +112,7 @@ const CardEmployee = ({ employee, deleteEmployee, updateEmployee }) => {
                 <span className="text-teal-600 text-sm">💼</span>
                 <p className="text-gray-700 font-medium text-xs">
                   <span className="font-semibold">Contratación:</span><br />
-                  {employee.hireDate ? 
-                    new Date(employee.hireDate).toLocaleDateString() : 
-                    'N/A'
-                  }
+                  {formatDate(employee.hireDate)}
                 </p>
               </div>
             </div>

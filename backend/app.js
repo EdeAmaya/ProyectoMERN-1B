@@ -32,7 +32,7 @@ app.use(cookieParser());
 
 app.use("/api/products", productsRoutes);
 app.use("/api/clients", clientsRoutes);
-app.use("/api/employees", validateAuthToken(["Employee"]),employeesRoutes);
+app.use("/api/employees",employeesRoutes);
 app.use("/api/sucursales", sucursalesRoutes);
 app.use("/api/categorias", categoriasRoutes);
 app.use("/api/reviews", reviewsRoutes);
