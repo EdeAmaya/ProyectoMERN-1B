@@ -15,6 +15,7 @@ import passwordRecoveryRoutes from "./src/routes/passwordRecovery.js";
 import blogRuotes from "./src/routes/blog.js";
 import { validateAuthToken } from "./src/middlewares/validateAuthToken.js";
 import cors from "cors";
+import salesRoutes from "./src/routes/sales.js";
 
 
 
@@ -42,7 +43,7 @@ app.use("/api/login", loginRoutes);
 app.use("/api/logout", logoutRoutes)
 app.use("/api/registerClients", registerClientsRoutes);
 app.use("/api/passwordRecovery", passwordRecoveryRoutes);
-
+app.use("/api/sales", salesRoutes);
 app.use("/api/blog", blogRuotes);
 
 
