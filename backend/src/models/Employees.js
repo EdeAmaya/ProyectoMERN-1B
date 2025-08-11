@@ -38,6 +38,16 @@ const EmployeesShema = new Schema({
     },
     isVerified: {
         type: Boolean
+    },
+
+    loginAttempts:{
+        type:Number,
+        default: 0
+    },
+
+    lockTime:{
+        type:Date,
+        default:null
     }
 },{
     timestamps: true,
